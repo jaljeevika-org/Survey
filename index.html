@@ -467,7 +467,7 @@
                 btnText: 'Start',
                 badge: '5 min',
                 surveys: [
-                    { icon: '🌊', iconClass: 'water', title: 'Water Resources Survey', description: 'Share information about water resources and usage in your area' },
+                    { icon: '🌊', iconClass: 'water', title: 'Water Body Survey', description: 'Share information about water resources and usage in your area' },
                     { icon: '🐟', iconClass: 'fish', title: 'Fisheries Survey', description: 'Provide feedback on fishing activities and aquaculture practices' },
                     { icon: '🌾', iconClass: 'agri', title: 'Agriculture Survey', description: 'Tell us about your farming practices and challenges' },
                     { icon: '👥', iconClass: 'community', title: 'Community Development Survey', description: 'Provide feedback on local development needs and priorities' },
@@ -510,6 +510,12 @@
                 ]
             }
         };
+
+        // Add coming soon messages
+        translations.hi.comingSoon = 'जल्द आ रहा है! यह सर्वेक्षण अभी विकास के अधीन है।';
+        translations.en.comingSoon = 'Coming Soon! This survey is currently under development.';
+        translations.mr.comingSoon = 'लवकरच येत आहे! हे सर्वेक्षण सध्या विकासाधीन आहे.';
+        translations.te.comingSoon = 'త్వరలో వస్తుంది! ఈ సర్వే ప్రస్తుతం అభివృద్ధిలో ఉంది.';
 
         let currentLang = 'hi';
         const surveyBaseUrl = 'https://script.google.com/a/macros/jaljeevika.org/s/AKfycbz-rCb_T8r_LIr1DAyIIEBWRkuE6h1zIpWy5ziY6ePxblDuvp-Fioo1cPW6A5clKj8OdQ/exec';
@@ -557,8 +563,14 @@
         }
 
         function openSurvey(surveyId) {
-            const url = `${surveyBaseUrl}?survey=${surveyId}&lang=${currentLang}`;
-            window.open(url, '_blank');
+            // Only allow the first survey (Water Body Survey)
+            if (surveyId === 1) {
+                const url = `${surveyBaseUrl}?survey=${surveyId}&lang=${currentLang}`;
+                window.open(url, '_blank');
+            } else {
+                // Show coming soon alert for all other surveys
+                alert(translations[currentLang].comingSoon || translations['en'].comingSoon);
+            }
         }
 
         renderSurveys();
