@@ -410,8 +410,8 @@
                 </div>
             </div>
             <div class="language-selector">
-                <button class="lang-btn active" onclick="changeLanguage('hi')">हिंदी</button>
-                <button class="lang-btn" onclick="changeLanguage('en')">English</button>
+                <button class="lang-btn active" onclick="changeLanguage('en')">English</button>
+                <button class="lang-btn" onclick="changeLanguage('hi')">हिंदी</button>
                 <button class="lang-btn" onclick="changeLanguage('mr')">मराठी</button>
                 <button class="lang-btn" onclick="changeLanguage('te')">తెలుగు</button>
             </div>
@@ -420,13 +420,13 @@
 
     <section class="hero">
         <div class="hero-content">
-            <h2 id="heroTitle">सर्वेक्षण में भाग लें</h2>
-            <p id="heroSubtitle">अपने अनुभव साझा करें और समुदाय के विकास में योगदान दें</p>
+            <h2 id="heroTitle">Participate in Our Surveys</h2>
+            <p id="heroSubtitle">Share your experiences and contribute to community development</p>
         </div>
     </section>
 
     <main class="main-content">
-        <p class="section-label" id="sectionLabel">उपलब्ध सर्वेक्षण</p>
+        <p class="section-label" id="sectionLabel">Available Surveys</p>
         <div class="survey-grid" id="surveyGrid">
             <!-- Survey cards populated by JavaScript -->
         </div>
@@ -434,8 +434,7 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <p id="footerText">© 2024 <a href="https://jaljeevika.org" target="_blank">Jaljeevika.org</a> — सभी अधिकार
-                सुरक्षित</p>
+            <p id="footerText">© 2024 <a href="https://jaljeevika.org" target="_blank">Jaljeevika.org</a> — All Rights Reserved</p>
         </div>
     </footer>
 
@@ -451,11 +450,12 @@
                 badge: '5 मिनट',
                 surveys: [
                     { icon: '🌊', iconClass: 'water', title: 'जल संसाधन सर्वेक्षण', description: 'अपने क्षेत्र में जल संसाधनों और उपयोग के बारे में जानकारी साझा करें' },
-                    { icon: '🐟', iconClass: 'fish', title: 'मत्स्य पालन सर्वेक्षण', description: 'मछली पकड़ने की गतिविधियों और मत्स्य पालन प्रथाओं पर प्रतिक्रिया दें' },
-                    { icon: '🌾', iconClass: 'agri', title: 'कृषि सर्वेक्षण', description: 'अपनी कृषि पद्धतियों और चुनौतियों के बारे में बताएं' },
-                    { icon: '👥', iconClass: 'community', title: 'सामुदायिक विकास सर्वेक्षण', description: 'स्थानीय विकास आवश्यकताओं और प्राथमिकताओं पर फीडबैक दें' },
+                    { icon: '📋', iconClass: 'fish', title: 'बेसलाइन सर्वेक्षण', description: 'प्रारंभिक डेटा और सामुदायिक जानकारी साझा करने के लिए बेसलाइन सर्वेक्षण में भाग लें' },
+                    { icon: '🎓', iconClass: 'agri', title: 'जलजीविका प्रशिक्षण प्रमाणपत्र अनुरोध फॉर्म', description: 'अपने प्रशिक्षण प्रमाणपत्र का अनुरोध करने के लिए फॉर्म भरें' },
+                    { icon: '📝', iconClass: 'community', title: 'प्रशिक्षण सत्र रिपोर्ट फॉर्म', description: 'प्रशिक्षण सत्र की रिपोर्ट जमा करने के लिए फॉर्म भरें' },
                     { icon: '💧', iconClass: 'quality', title: 'जल गुणवत्ता सर्वेक्षण', description: 'अपने क्षेत्र में पानी की गुणवत्ता और स्वच्छता का आकलन करें' },
-                    { icon: '📊', iconClass: 'economic', title: 'आर्थिक प्रभाव सर्वेक्षण', description: 'जल संसाधन परियोजनाओं के आर्थिक प्रभाव को साझा करें' }
+                    { icon: '📊', iconClass: 'economic', title: 'आर्थिक प्रभाव सर्वेक्षण', description: 'जल संसाधन परियोजनाओं के आर्थिक प्रभाव को साझा करें' },
+                    { icon: '👥', iconClass: 'water', title: 'सामुदायिक विकास सर्वेक्षण', description: 'स्थानीय विकास आवश्यकताओं और प्राथमिकताओं पर फीडबैक दें' }
                 ]
             },
             en: {
@@ -468,11 +468,12 @@
                 badge: '5 min',
                 surveys: [
                     { icon: '🌊', iconClass: 'water', title: 'Water Body Survey', description: 'Share information about water resources and usage in your area' },
-                    { icon: '🐟', iconClass: 'fish', title: 'Fisheries Survey', description: 'Provide feedback on fishing activities and aquaculture practices' },
-                    { icon: '🌾', iconClass: 'agri', title: 'Agriculture Survey', description: 'Tell us about your farming practices and challenges' },
-                    { icon: '👥', iconClass: 'community', title: 'Community Development Survey', description: 'Provide feedback on local development needs and priorities' },
+                    { icon: '📋', iconClass: 'fish', title: 'Baseline Survey', description: 'Participate in baseline survey to share initial data and community information' },
+                    { icon: '🎓', iconClass: 'agri', title: 'Jaljeevika Training Certificate Request Form', description: 'Fill the form to request your training certificate' },
+                    { icon: '📝', iconClass: 'community', title: 'Training Session Report Form', description: 'Fill the form to submit training session report' },
                     { icon: '💧', iconClass: 'quality', title: 'Water Quality Survey', description: 'Assess water quality and sanitation in your region' },
-                    { icon: '📊', iconClass: 'economic', title: 'Economic Impact Survey', description: 'Share the economic impact of water resource projects' }
+                    { icon: '📊', iconClass: 'economic', title: 'Economic Impact Survey', description: 'Share the economic impact of water resource projects' },
+                    { icon: '👥', iconClass: 'water', title: 'Community Development Survey', description: 'Provide feedback on local development needs and priorities' }
                 ]
             },
             mr: {
@@ -485,11 +486,12 @@
                 badge: '5 मिनिटे',
                 surveys: [
                     { icon: '🌊', iconClass: 'water', title: 'जल संसाधन सर्वेक्षण', description: 'तुमच्या क्षेत्रातील जल संसाधने आणि वापराबद्दल माहिती शेअर करा' },
-                    { icon: '🐟', iconClass: 'fish', title: 'मत्स्यपालन सर्वेक्षण', description: 'मासेमारी क्रियाकलाप आणि मत्स्यपालन पद्धतींवर अभिप्राय द्या' },
-                    { icon: '🌾', iconClass: 'agri', title: 'शेती सर्वेक्षण', description: 'तुमच्या शेती पद्धती आणि आव्हानांबद्दल सांगा' },
-                    { icon: '👥', iconClass: 'community', title: 'सामुदायिक विकास सर्वेक्षण', description: 'स्थानिक विकास गरजा आणि प्राधान्यक्रमांवर अभिप्राय द्या' },
+                    { icon: '📋', iconClass: 'fish', title: 'बेसलाइन सर्वेक्षण', description: 'प्रारंभिक डेटा आणि सामुदायिक माहिती शेअर करण्यासाठी बेसलाइन सर्वेक्षणात सहभागी व्हा' },
+                    { icon: '🎓', iconClass: 'agri', title: 'जलजीविका प्रशिक्षण प्रमाणपत्र विनंती फॉर्म', description: 'तुमचे प्रशिक्षण प्रमाणपत्र विनंती करण्यासाठी फॉर्म भरा' },
+                    { icon: '📝', iconClass: 'community', title: 'प्रशिक्षण सत्र अहवाल फॉर्म', description: 'प्रशिक्षण सत्राचा अहवाल सबमिट करण्यासाठी फॉर्म भरा' },
                     { icon: '💧', iconClass: 'quality', title: 'जल गुणवत्ता सर्वेक्षण', description: 'तुमच्या प्रदेशातील पाण्याची गुणवत्ता आणि स्वच्छतेचे मूल्यांकन करा' },
-                    { icon: '📊', iconClass: 'economic', title: 'आर्थिक प्रभाव सर्वेक्षण', description: 'जल संसाधन प्रकल्पांचा आर्थिक प्रभाव शेअर करा' }
+                    { icon: '📊', iconClass: 'economic', title: 'आर्थिक प्रभाव सर्वेक्षण', description: 'जल संसाधन प्रकल्पांचा आर्थिक प्रभाव शेअर करा' },
+                    { icon: '👥', iconClass: 'water', title: 'सामुदायिक विकास सर्वेक्षण', description: 'स्थानिक विकास गरजा आणि प्राधान्यक्रमांवर अभिप्राय द्या' }
                 ]
             },
             te: {
@@ -502,11 +504,12 @@
                 badge: '5 నిమిషాలు',
                 surveys: [
                     { icon: '🌊', iconClass: 'water', title: 'నీటి వనరుల సర్వే', description: 'మీ ప్రాంతంలో నీటి వనరులు మరియు వినియోగం గురించి సమాచారం పంచుకోండి' },
-                    { icon: '🐟', iconClass: 'fish', title: 'మత్స్య పరిశ్రమ సర్వే', description: 'చేపల పట్టడం కార్యకలాపాలు మరియు మత్స్య సాగు పద్ధతులపై అభిప్రాయం ఇవ్వండి' },
-                    { icon: '🌾', iconClass: 'agri', title: 'వ్యవసాయ సర్వే', description: 'మీ వ్యవసాయ పద్ధతులు మరియు సవాళ్ల గురించి చెప్పండి' },
-                    { icon: '👥', iconClass: 'community', title: 'సామాజిక అభివృద్ధి సర్వే', description: 'స్థానిక అభివృద్ధి అవసరాలు మరియు ప్రాధాన్యతలపై అభిప్రాయం ఇవ్వండి' },
+                    { icon: '📋', iconClass: 'fish', title: 'బేస్‌లైన్ సర్వే', description: 'ప్రారంభ డేటా మరియు సమాజ సమాచారాన్ని పంచుకోవడానికి బేస్‌లైన్ సర్వేలో పాల్గొనండి' },
+                    { icon: '🎓', iconClass: 'agri', title: 'జల్జీవికా శిక్షణ సర్టిఫికేట్ అభ్యర్థన ఫారం', description: 'మీ శిక్షణ సర్టిఫికేట్‌ను అభ్యర్థించడానికి ఫారం పూరించండి' },
+                    { icon: '📝', iconClass: 'community', title: 'శిక్షణ సెషన్ నివేదిక ఫారం', description: 'శిక్షణ సెషన్ నివేదికను సమర్పించడానికి ఫారం పూరించండి' },
                     { icon: '💧', iconClass: 'quality', title: 'నీటి నాణ్యత సర్వే', description: 'మీ ప్రాంతంలో నీటి నాణ్యత మరియు పారిశుద్ధ్యాన్ని అంచనా వేయండి' },
-                    { icon: '📊', iconClass: 'economic', title: 'ఆర్థిక ప్రభావ సర్వే', description: 'నీటి వనరుల ప్రాజెక్టుల ఆర్థిక ప్రభావాన్ని పంచుకోండి' }
+                    { icon: '📊', iconClass: 'economic', title: 'ఆర్థిక ప్రభావ సర్వే', description: 'నీటి వనరుల ప్రాజెక్టుల ఆర్థిక ప్రభావాన్ని పంచుకోండి' },
+                    { icon: '👥', iconClass: 'water', title: 'సామాజిక అభివృద్ధి సర్వే', description: 'స్థానిక అభివృద్ధి అవసరాలు మరియు ప్రాధాన్యతలపై అభిప్రాయం ఇవ్వండి' }
                 ]
             }
         };
@@ -517,8 +520,9 @@
         translations.mr.comingSoon = 'लवकरच येत आहे! हे सर्वेक्षण सध्या विकासाधीन आहे.';
         translations.te.comingSoon = 'త్వరలో వస్తుంది! ఈ సర్వే ప్రస్తుతం అభివృద్ధిలో ఉంది.';
 
-        let currentLang = 'hi';
+        let currentLang = 'en';
         const surveyBaseUrl = 'https://script.google.com/a/macros/jaljeevika.org/s/AKfycbz-rCb_T8r_LIr1DAyIIEBWRkuE6h1zIpWy5ziY6ePxblDuvp-Fioo1cPW6A5clKj8OdQ/exec';
+        const logoUrl = 'https://storage.googleapis.com/jaljeevika_chatbot/Logo.jpg';
 
         function changeLanguage(lang) {
             currentLang = lang;
@@ -566,6 +570,18 @@
             // Only allow the first survey (Water Body Survey)
             if (surveyId === 1) {
                 const url = `${surveyBaseUrl}?survey=${surveyId}&lang=${currentLang}`;
+                window.open(url, '_blank');
+            } else if (surveyId === 2) {
+                // Baseline survey
+                const url = `https://script.google.com/macros/s/AKfycbxCG60pXHlSBb9luPe-ujuvCSxzlgr_XRQYzyJN9wpy9uUhNGvV4oKbnpdILbThjYVz/exec?logo=${encodeURIComponent(logoUrl)}`;
+                window.open(url, '_blank');
+            } else if (surveyId === 3) {
+                // Training Certificate Request Form
+                const url = 'https://script.google.com/a/macros/jaljeevika.org/s/AKfycbxOKfzfYSVmoa5UJnhzyAFPpo3vJ7_QZmYFo1q31E36Km7iSCMGOYL4lvPTHmL_UPYZDg/exec';
+                window.open(url, '_blank');
+            } else if (surveyId === 4) {
+                // Training Session Report Form
+                const url = `https://script.google.com/macros/s/AKfycbyGv5kGQMtfFcdazEojaHzBCYEoGO_zroYTkZOPslr25Kwbb_wx1k3c9Oxz0r6M63AC/exec?logo=${encodeURIComponent(logoUrl)}`;
                 window.open(url, '_blank');
             } else {
                 // Show coming soon alert for all other surveys
