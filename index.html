@@ -24,6 +24,8 @@
             --gray-dark: #343A40;
             --shadow: 0 2px 8px rgba(0, 119, 182, 0.08);
             --shadow-hover: 0 8px 24px rgba(0, 119, 182, 0.15);
+            --gradient-primary: linear-gradient(135deg, #0077B6 0%, #00B4D8 100%);
+            --gradient-hero: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         }
 
         * {
@@ -32,12 +34,28 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: var(--off-white);
             min-height: 100vh;
             color: var(--gray-dark);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Selection Color */
+        ::selection {
+            background: var(--primary-light);
+            color: var(--white);
+        }
+
+        ::-moz-selection {
+            background: var(--primary-light);
+            color: var(--white);
         }
 
         /* Header */
@@ -48,6 +66,20 @@
             position: sticky;
             top: 0;
             z-index: 100;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .header-content {
@@ -69,8 +101,14 @@
         .logo-img {
             height: 48px;
             width: auto;
-            border-radius: 6px;
+            border-radius: 8px;
             object-fit: contain;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-img:hover {
+            transform: scale(1.05);
         }
 
         .logo-text h1 {
@@ -95,95 +133,272 @@
 
         .lang-btn {
             padding: 8px 16px;
-            border: 1px solid var(--gray-light);
+            border: 2px solid var(--gray-light);
             background: var(--white);
             color: var(--gray-dark);
-            border-radius: 20px;
+            border-radius: 24px;
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 500;
             font-family: inherit;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .lang-btn:hover {
             border-color: var(--primary-blue);
             color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 119, 182, 0.15);
+        }
+
+        .lang-btn:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1);
         }
 
         .lang-btn.active {
-            background: var(--primary-blue);
+            background: var(--gradient-primary);
             border-color: var(--primary-blue);
             color: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 119, 182, 0.3);
         }
 
         /* Hero Section */
         .hero {
-            background: var(--white);
-            padding: 48px 20px;
+            background: var(--gradient-hero);
+            padding: 60px 20px 48px;
             text-align: center;
             border-bottom: 1px solid var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
 
         .hero-content {
-            max-width: 640px;
+            max-width: 740px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h2 {
-            font-size: 1.75rem;
+            font-size: 2.25rem;
             font-weight: 700;
             color: var(--gray-dark);
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.6s ease-out;
         }
 
         .hero p {
-            font-size: 1rem;
-            color: var(--gray);
-            max-width: 480px;
+            font-size: 1.1rem;
+            color: var(--gray-dark);
+            max-width: 520px;
+            margin: 0 auto 32px;
+            opacity: 0.85;
+            animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Search Bar */
+        .search-container {
+            max-width: 600px;
             margin: 0 auto;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out 0.4s backwards;
+        }
+
+        .search-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 18px;
+            color: var(--gray);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 52px 16px 52px;
+            border: 2px solid var(--gray-light);
+            border-radius: 50px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--white);
+            color: var(--gray-dark);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 8px 24px rgba(0, 119, 182, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .search-input::placeholder {
+            color: var(--gray);
+            opacity: 0.7;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 18px;
+            background: var(--gray-light);
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--gray);
+            transition: all 0.2s ease;
+        }
+
+        .clear-search:hover {
+            background: var(--gray);
+            color: var(--white);
+        }
+
+        .clear-search:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .clear-search.active {
+            display: flex;
         }
 
         /* Main Content */
         .main-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 32px 20px 48px;
+            padding: 40px 20px 48px;
         }
 
         .section-label {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
             color: var(--primary-blue);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
+            letter-spacing: 1.5px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 32px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
         }
 
         /* Survey Grid */
         .survey-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 20px;
+            gap: 24px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         .survey-card {
             background: var(--white);
-            border-radius: 12px;
-            padding: 24px;
-            border: 1px solid var(--gray-light);
-            transition: all 0.25s ease;
+            border-radius: 16px;
+            padding: 28px;
+            border: 2px solid var(--gray-light);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 18px;
+            position: relative;
+            overflow: hidden;
+            animation: cardFadeIn 0.6s ease-out backwards;
+        }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .survey-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .survey-card:hover::before {
+            transform: scaleX(1);
         }
 
         .survey-card:hover {
             border-color: var(--primary-blue);
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 119, 182, 0.15);
+            transform: translateY(-6px);
+        }
+
+        .survey-card:focus-within {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.1), 0 12px 32px rgba(0, 119, 182, 0.15);
         }
 
         .card-header {
@@ -193,51 +408,79 @@
         }
 
         .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 10px;
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 28px;
             flex-shrink: 0;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .survey-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .card-icon.water {
             background: linear-gradient(135deg, #E0F4FF, #B8E6FF);
+            box-shadow: 0 4px 12px rgba(0, 180, 216, 0.2);
         }
 
         .card-icon.fish {
             background: linear-gradient(135deg, #E3F6F1, #B8EBE0);
+            box-shadow: 0 4px 12px rgba(45, 157, 120, 0.2);
         }
 
         .card-icon.agri {
             background: linear-gradient(135deg, #FFF8E0, #FFECB3);
+            box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
         }
 
         .card-icon.community {
             background: linear-gradient(135deg, #F3E8FF, #E0CFFF);
+            box-shadow: 0 4px 12px rgba(156, 39, 176, 0.2);
         }
 
         .card-icon.quality {
             background: linear-gradient(135deg, #E0F7FF, #B3ECFF);
+            box-shadow: 0 4px 12px rgba(0, 188, 212, 0.2);
         }
 
         .card-icon.economic {
             background: linear-gradient(135deg, #FFF0E0, #FFE0C2);
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.2);
+        }
+
+        .card-icon.market {
+            background: linear-gradient(135deg, #FFE0F0, #FFD0E8);
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.2);
+        }
+
+        .card-icon.gender {
+            background: linear-gradient(135deg, #F0E0FF, #E0D0FF);
+            box-shadow: 0 4px 12px rgba(103, 58, 183, 0.2);
+        }
+
+        .card-icon.enduse {
+            background: linear-gradient(135deg, #E0FFE0, #D0FFD0);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
         }
 
         .card-info h3 {
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: var(--gray-dark);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
+            line-height: 1.3;
         }
 
         .card-info p {
-            font-size: 0.875rem;
+            font-size: 0.9rem;
             color: var(--gray);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .card-action {
@@ -253,20 +496,27 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 10px 20px;
-            background: var(--primary-blue);
+            padding: 12px 24px;
+            background: var(--gradient-primary);
             color: var(--white);
             border: none;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 500;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
             font-family: inherit;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 119, 182, 0.2);
         }
 
         .start-btn:hover {
-            background: var(--primary-dark);
+            transform: translateX(4px);
+            box-shadow: 0 6px 20px rgba(0, 119, 182, 0.3);
+        }
+
+        .start-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.2), 0 6px 20px rgba(0, 119, 182, 0.3);
         }
 
         .start-btn svg {
@@ -275,20 +525,50 @@
         }
 
         .card-badge {
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            background: var(--off-white);
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
             color: var(--gray);
-            border-radius: 12px;
-            font-weight: 500;
+            border-radius: 16px;
+            font-weight: 600;
+            border: 1px solid var(--gray-light);
+        }
+
+        .survey-card.hidden {
+            display: none;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--gray);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .no-results-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .no-results h3 {
+            font-size: 1.25rem;
+            color: var(--gray-dark);
+            margin-bottom: 8px;
+        }
+
+        .no-results p {
+            font-size: 1rem;
+            color: var(--gray);
         }
 
         /* Footer */
         .footer {
             background: var(--white);
             border-top: 1px solid var(--gray-light);
-            padding: 24px 20px;
+            padding: 32px 20px;
             text-align: center;
+            margin-top: auto;
         }
 
         .footer-content {
@@ -297,18 +577,39 @@
         }
 
         .footer p {
-            font-size: 0.85rem;
+            font-size: 0.875rem;
             color: var(--gray);
+            line-height: 1.8;
         }
 
         .footer a {
             color: var(--primary-blue);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            transition: color 0.2s ease;
         }
 
         .footer a:hover {
+            color: var(--primary-dark);
             text-decoration: underline;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
         }
 
         /* Mobile Responsive */
@@ -332,52 +633,95 @@
             }
 
             .lang-btn {
-                padding: 6px 12px;
+                padding: 7px 14px;
                 font-size: 0.8rem;
             }
 
             .hero {
-                padding: 32px 16px;
+                padding: 40px 16px 36px;
             }
 
             .hero h2 {
-                font-size: 1.5rem;
+                font-size: 1.85rem;
             }
 
             .hero p {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
+                margin-bottom: 24px;
+            }
+
+            .search-container {
+                max-width: 100%;
+            }
+
+            .search-input {
+                padding: 14px 48px 14px 48px;
+                font-size: 0.95rem;
+            }
+
+            .search-icon {
+                left: 16px;
+            }
+
+            .clear-search {
+                right: 16px;
             }
 
             .main-content {
-                padding: 24px 16px 40px;
+                padding: 28px 16px 40px;
+            }
+
+            .section-label {
+                font-size: 0.75rem;
+                margin-bottom: 20px;
+            }
+
+            .section-label::before {
+                width: 24px;
             }
 
             .survey-grid {
                 grid-template-columns: 1fr;
-                gap: 16px;
+                gap: 18px;
             }
 
             .survey-card {
-                padding: 20px;
+                padding: 24px;
             }
 
             .card-icon {
-                width: 44px;
-                height: 44px;
-                font-size: 20px;
+                width: 52px;
+                height: 52px;
+                font-size: 24px;
             }
 
             .card-info h3 {
-                font-size: 0.95rem;
+                font-size: 1.05rem;
             }
 
             .card-info p {
-                font-size: 0.825rem;
+                font-size: 0.875rem;
             }
 
             .start-btn {
-                padding: 10px 16px;
-                font-size: 0.825rem;
+                padding: 11px 18px;
+                font-size: 0.875rem;
+            }
+
+            .no-results {
+                padding: 48px 20px;
+            }
+
+            .no-results-icon {
+                font-size: 48px;
+            }
+
+            .no-results h3 {
+                font-size: 1.1rem;
+            }
+
+            .no-results p {
+                font-size: 0.9rem;
             }
 
             .footer {
@@ -422,6 +766,25 @@
         <div class="hero-content">
             <h2 id="heroTitle">Participate in Our Surveys</h2>
             <p id="heroSubtitle">Share your experiences and contribute to community development</p>
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <svg class="search-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="searchInput" 
+                        placeholder="Search surveys..."
+                        oninput="filterSurveys()"
+                    >
+                    <button class="clear-search" id="clearSearch" onclick="clearSearch()">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -429,6 +792,11 @@
         <p class="section-label" id="sectionLabel">Available Surveys</p>
         <div class="survey-grid" id="surveyGrid">
             <!-- Survey cards populated by JavaScript -->
+        </div>
+        <div class="no-results" id="noResults" style="display: none;">
+            <div class="no-results-icon">🔍</div>
+            <h3 id="noResultsTitle">No surveys found</h3>
+            <p id="noResultsText">Try adjusting your search terms</p>
         </div>
     </main>
 
@@ -448,14 +816,18 @@
                 footerText: '© 2024 <a href="https://jaljeevika.org" target="_blank">Jaljeevika.org</a> — सभी अधिकार सुरक्षित',
                 btnText: 'शुरू करें',
                 badge: '5 मिनट',
+                searchPlaceholder: 'सर्वेक्षण खोजें...',
+                noResultsTitle: 'कोई सर्वेक्षण नहीं मिला',
+                noResultsText: 'अपनी खोज शब्दों को समायोजित करने का प्रयास करें',
                 surveys: [
                     { icon: '🌊', iconClass: 'water', title: 'जल संसाधन सर्वेक्षण', description: 'अपने क्षेत्र में जल संसाधनों और उपयोग के बारे में जानकारी साझा करें' },
                     { icon: '📋', iconClass: 'fish', title: 'बेसलाइन सर्वेक्षण', description: 'प्रारंभिक डेटा और सामुदायिक जानकारी साझा करने के लिए बेसलाइन सर्वेक्षण में भाग लें' },
                     { icon: '🎓', iconClass: 'agri', title: 'जलजीविका प्रशिक्षण प्रमाणपत्र अनुरोध फॉर्म', description: 'अपने प्रशिक्षण प्रमाणपत्र का अनुरोध करने के लिए फॉर्म भरें' },
                     { icon: '📝', iconClass: 'community', title: 'प्रशिक्षण सत्र रिपोर्ट फॉर्म (प्रबंधकों के लिए)', description: 'प्रबंधकों/प्रशिक्षकों द्वारा प्रशिक्षण सत्र की रिपोर्ट जमा करने के लिए फॉर्म भरें' },
-                    { icon: '💧', iconClass: 'quality', title: 'जल गुणवत्ता सर्वेक्षण', description: 'अपने क्षेत्र में पानी की गुणवत्ता और स्वच्छता का आकलन करें' },
-                    { icon: '📊', iconClass: 'economic', title: 'आर्थिक प्रभाव सर्वेक्षण', description: 'जल संसाधन परियोजनाओं के आर्थिक प्रभाव को साझा करें' },
-                    { icon: '👥', iconClass: 'water', title: 'सामुदायिक विकास सर्वेक्षण', description: 'स्थानीय विकास आवश्यकताओं और प्राथमिकताओं पर फीडबैक दें' }
+                    { icon: '�', iconClass: 'market', title: 'मछली बाजार मूल्यांकन', description: 'मुंबई मछली बाजारों के एकीकृत मूल्यांकन और आजीविका पर अपने अनुभव साझा करें' },
+                    { icon: '👩', iconClass: 'gender', title: 'मछली विक्रेता सर्वेक्षण - महिलाएं', description: 'महिलाओं की आजीविका और लैंगिक गतिशीलता पर प्रतिक्रिया दें' },
+                    { icon: '🏨', iconClass: 'economic', title: 'मछली व्यापार संबंध सर्वेक्षण', description: 'होटल, रेस्तरां, कैफे और B2B व्यापार संबंधों पर जानकारी साझा करें' },
+                    { icon: '🛒', iconClass: 'quality', title: 'उपभोक्ता वरीयता और बाजार धारणा सर्वेक्षण', description: 'उपभोक्ता वरीयताओं और बाजार की धारणाओं के बारे में अपनी राय साझा करें' }
                 ]
             },
             en: {
@@ -465,15 +837,19 @@
                 sectionLabel: 'Available Surveys',
                 footerText: '© 2024 <a href="https://jaljeevika.org" target="_blank">Jaljeevika.org</a> — All Rights Reserved',
                 btnText: 'Start',
-                badge: '5 min',
+                badge: '3 min',
+                searchPlaceholder: 'Search surveys...',
+                noResultsTitle: 'No surveys found',
+                noResultsText: 'Try adjusting your search terms',
                 surveys: [
                     { icon: '🌊', iconClass: 'water', title: 'Water Body Survey', description: 'Share information about water resources and usage in your area' },
                     { icon: '📋', iconClass: 'fish', title: 'Baseline Survey', description: 'Participate in baseline survey to share initial data and community information' },
                     { icon: '🎓', iconClass: 'agri', title: 'Jaljeevika Training Certificate Request Form', description: 'Fill the form to request your training certificate' },
                     { icon: '📝', iconClass: 'community', title: 'Training Session Report Form (For Managers)', description: 'Form to be filled by managers/trainers to submit training session report' },
-                    { icon: '💧', iconClass: 'quality', title: 'Water Quality Survey', description: 'Assess water quality and sanitation in your region' },
-                    { icon: '📊', iconClass: 'economic', title: 'Economic Impact Survey', description: 'Share the economic impact of water resource projects' },
-                    { icon: '👥', iconClass: 'water', title: 'Community Development Survey', description: 'Provide feedback on local development needs and priorities' }
+                    { icon: '�', iconClass: 'market', title: 'Fish market assessment', description: 'Share your experiences on unified assessment and livelihood of Mumbai fish markets' },
+                    { icon: '👩', iconClass: 'gender', title: 'Fish vendor survey - women', description: 'Provide feedback on women\'s livelihood and gender dynamics in fisheries sector' },
+                    { icon: '🏨', iconClass: 'economic', title: 'Fish business linkage survey', description: 'Share information about Hotel, Restaurant, Cafe and B2B business linkages' },
+                    { icon: '🛒', iconClass: 'quality', title: 'Consumer Preference & Market Perception Survey', description: 'Share your opinions on consumer preferences and market perceptions' }
                 ]
             },
             mr: {
@@ -484,14 +860,18 @@
                 footerText: '© 2024 <a href="https://jaljeevika.org" target="_blank">Jaljeevika.org</a> — सर्व हक्क राखीव',
                 btnText: 'सुरू करा',
                 badge: '5 मिनिटे',
+                searchPlaceholder: 'सर्वेक्षण शोधा...',
+                noResultsTitle: 'सर्वेक्षण सापडले नाही',
+                noResultsText: 'आपल्या शोध शब्दांमध्ये बदल करून पहा',
                 surveys: [
                     { icon: '🌊', iconClass: 'water', title: 'जल संसाधन सर्वेक्षण', description: 'तुमच्या क्षेत्रातील जल संसाधने आणि वापराबद्दल माहिती शेअर करा' },
                     { icon: '📋', iconClass: 'fish', title: 'बेसलाइन सर्वेक्षण', description: 'प्रारंभिक डेटा आणि सामुदायिक माहिती शेअर करण्यासाठी बेसलाइन सर्वेक्षणात सहभागी व्हा' },
                     { icon: '🎓', iconClass: 'agri', title: 'जलजीविका प्रशिक्षण प्रमाणपत्र विनंती फॉर्म', description: 'तुमचे प्रशिक्षण प्रमाणपत्र विनंती करण्यासाठी फॉर्म भरा' },
                     { icon: '📝', iconClass: 'community', title: 'प्रशिक्षण सत्र अहवाल फॉर्म (व्यवस्थापकांसाठी)', description: 'व्यवस्थापक/प्रशिक्षकांनी प्रशिक्षण सत्राचा अहवाल सबमिट करण्यासाठी फॉर्म भरा' },
-                    { icon: '💧', iconClass: 'quality', title: 'जल गुणवत्ता सर्वेक्षण', description: 'तुमच्या प्रदेशातील पाण्याची गुणवत्ता आणि स्वच्छतेचे मूल्यांकन करा' },
-                    { icon: '📊', iconClass: 'economic', title: 'आर्थिक प्रभाव सर्वेक्षण', description: 'जल संसाधन प्रकल्पांचा आर्थिक प्रभाव शेअर करा' },
-                    { icon: '👥', iconClass: 'water', title: 'सामुदायिक विकास सर्वेक्षण', description: 'स्थानिक विकास गरजा आणि प्राधान्यक्रमांवर अभिप्राय द्या' }
+                    { icon: '�', iconClass: 'market', title: 'मासे बाजार मूल्यमापन', description: 'मुंबई मासे बाजारांच्या एकात्मिक मूल्यमापन आणि उपजीविकेवर तुमचे अनुभव शेअर करा' },
+                    { icon: '👩', iconClass: 'gender', title: 'मासे विक्रेता सर्वेक्षण - महिला', description: 'मत्स्यपालन क्षेत्रातील महिलांच्या उपजीविका आणि लैंगिक गतिशीलतेवर अभिप्राय द्या' },
+                    { icon: '🏨', iconClass: 'economic', title: 'मासे व्यवसाय संबंध सर्वेक्षण', description: 'हॉटेल, रेस्टॉरंट, कॅफे आणि B2B व्यावसायिक संबंधांबद्दल माहिती शेअर करा' },
+                    { icon: '🛒', iconClass: 'quality', title: 'ग्राहक प्राधान्य आणि बाजार धारणा सर्वेक्षण', description: 'ग्राहक प्राधान्ये आणि बाजार धारणांवर तुमचे मत शेअर करा' }
                 ]
             },
             te: {
@@ -502,14 +882,18 @@
                 footerText: '© 2024 <a href="https://jaljeevika.org" target="_blank">Jaljeevika.org</a> — అన్ని హక్కులు రిజర్వ్ చేయబడ్డాయి',
                 btnText: 'ప్రారంభించండి',
                 badge: '5 నిమిషాలు',
+                searchPlaceholder: 'సర్వేలను శోధించండి...',
+                noResultsTitle: 'సర్వేలు కనుగొనబడలేదు',
+                noResultsText: 'మీ శోధన పదాలను సర్దుబాటు చేయడానికి ప్రయత్నించండి',
                 surveys: [
                     { icon: '🌊', iconClass: 'water', title: 'నీటి వనరుల సర్వే', description: 'మీ ప్రాంతంలో నీటి వనరులు మరియు వినియోగం గురించి సమాచారం పంచుకోండి' },
                     { icon: '📋', iconClass: 'fish', title: 'బేస్‌లైన్ సర్వే', description: 'ప్రారంభ డేటా మరియు సమాజ సమాచారాన్ని పంచుకోవడానికి బేస్‌లైన్ సర్వేలో పాల్గొనండి' },
                     { icon: '🎓', iconClass: 'agri', title: 'జల్జీవికా శిక్షణ సర్టిఫికేట్ అభ్యర్థన ఫారం', description: 'మీ శిక్షణ సర్టిఫికేట్‌ను అభ్యర్థించడానికి ఫారం పూరించండి' },
                     { icon: '📝', iconClass: 'community', title: 'శిక్షణ సెషన్ నివేదిక ఫారం (మ్యానేజర్ల కోసం)', description: 'మ్యానేజర్లు/నిర్దేశకులు శిక్షణ సెషన్ నివేదికను సమర్పించడానికి ఫారం పూరించండి' },
-                    { icon: '💧', iconClass: 'quality', title: 'నీటి నాణ్యత సర్వే', description: 'మీ ప్రాంతంలో నీటి నాణ్యత మరియు పారిశుద్ధ్యాన్ని అంచనా వేయండి' },
-                    { icon: '📊', iconClass: 'economic', title: 'ఆర్థిక ప్రభావ సర్వే', description: 'నీటి వనరుల ప్రాజెక్టుల ఆర్థిక ప్రభావాన్ని పంచుకోండి' },
-                    { icon: '👥', iconClass: 'water', title: 'సామాజిక అభివృద్ధి సర్వే', description: 'స్థానిక అభివృద్ధి అవసరాలు మరియు ప్రాధాన్యతలపై అభిప్రాయం ఇవ్వండి' }
+                    { icon: '�', iconClass: 'market', title: 'చేపల మార్కెట్ అంచనా', description: 'ముంబై చేపల మార్కెట్ల ఏకీకృత అంచనా మరియు జీవనోపాధిపై మీ అనుభవాలను పంచుకోండి' },
+                    { icon: '👩', iconClass: 'gender', title: 'చేపల విక్రేత సర్వే - మహిళలు', description: 'చేపల పెంపకం రంగంలో మహిళల జీవనోపాధి మరియు లింగ డైనమిక్స్‌పై అభిప్రాయం ఇవ్వండి' },
+                    { icon: '🏨', iconClass: 'economic', title: 'చేపల వ్యాపార సంబంధ సర్వే', description: 'హోటల్, రెస్టారెంట్, కేఫ్ మరియు B2B వ్యాపార సంబంధాల గురించి సమాచారం పంచుకోండి' },
+                    { icon: '🛒', iconClass: 'quality', title: 'వినియోగదారు ప్రాధాన్యత & మార్కెట్ అవగాహన సర్వే', description: 'వినియోగదారు ప్రాధాన్యతలు మరియు మార్కెట్ అవగాహనలపై మీ అభిప్రాయాలను పంచుకోండి' }
                 ]
             }
         };
@@ -536,6 +920,9 @@
             document.getElementById('heroSubtitle').textContent = t.heroSubtitle;
             document.getElementById('sectionLabel').textContent = t.sectionLabel;
             document.getElementById('footerText').innerHTML = t.footerText;
+            document.getElementById('searchInput').placeholder = t.searchPlaceholder;
+            document.getElementById('noResultsTitle').textContent = t.noResultsTitle;
+            document.getElementById('noResultsText').textContent = t.noResultsText;
 
             renderSurveys();
         }
@@ -545,7 +932,7 @@
             const grid = document.getElementById('surveyGrid');
 
             grid.innerHTML = t.surveys.map((survey, index) => `
-                <div class="survey-card" onclick="openSurvey(${index + 1})">
+                <div class="survey-card" data-title="${survey.title.toLowerCase()}" data-description="${survey.description.toLowerCase()}" style="animation-delay: ${index * 0.05}s" onclick="openSurvey(${index + 1})">
                     <div class="card-header">
                         <div class="card-icon ${survey.iconClass}">${survey.icon}</div>
                         <div class="card-info">
@@ -564,6 +951,11 @@
                     </div>
                 </div>
             `).join('');
+            
+            // Reset search
+            document.getElementById('searchInput').value = '';
+            document.getElementById('clearSearch').classList.remove('active');
+            document.getElementById('noResults').style.display = 'none';
         }
 
         function openSurvey(surveyId) {
@@ -573,7 +965,7 @@
                 window.open(url, '_blank');
             } else if (surveyId === 2) {
                 // Baseline survey
-                const url = `https://script.google.com/macros/s/AKfycbxCG60pXHlSBb9luPe-ujuvCSxzlgr_XRQYzyJN9wpy9uUhNGvV4oKbnpdILbThjYVz/exec?logo=${encodeURIComponent(logoUrl)}`;
+                const url = `https://script.google.com/a/macros/jaljeevika.org/s/AKfycbxCG60pXHlSBb9luPe-ujuvCSxzlgr_XRQYzyJN9wpy9uUhNGvV4oKbnpdILbThjYVz/exec?logo=${encodeURIComponent(logoUrl)}`;
                 window.open(url, '_blank');
             } else if (surveyId === 3) {
                 // Training Certificate Request Form
@@ -583,10 +975,69 @@
                 // Training Session Report Form
                 const url = `https://script.google.com/macros/s/AKfycbyGv5kGQMtfFcdazEojaHzBCYEoGO_zroYTkZOPslr25Kwbb_wx1k3c9Oxz0r6M63AC/exec?logo=${encodeURIComponent(logoUrl)}`;
                 window.open(url, '_blank');
+            } else if (surveyId === 5) {
+                // Fish market assessment
+                const url = 'https://script.google.com/macros/s/AKfycbz24GMZyDAMfFktJd9TDjXjasRpS9i3npZzmNcgefW4scyHNLQQdsUGjCTScz_1vKgrew/exec';
+                window.open(url, '_blank');
+            } else if (surveyId === 6) {
+                // Fish vendor survey - women
+                const url = 'https://script.google.com/macros/s/AKfycbwa37yT2ZM6peALWp04QHzi9Bx7-PEnK-Q6GRu-tuiYGOhkXC0b0xN_DBfIJSUjL57s/exec';
+                window.open(url, '_blank');
+            } else if (surveyId === 7) {
+                // Fish business linkage survey
+                const url = 'https://script.google.com/macros/s/AKfycbyxhhh8-Ze5svbP33_EO5myhZoyNSDt8USKjRXpRsK9oLdAZaPqWGkHWsZLhVMfoeXwtw/exec';
+                window.open(url, '_blank');
+            } else if (surveyId === 8) {
+                // Consumer Preference & Market Perception Survey
+                const url = 'https://script.google.com/macros/s/AKfycbze9bKp-9efmCYlCCs6X0NzG3CoQu3F3KdJaZqt2D98Ew4crUF8PPJTmHv1qmkm3tTR/exec';
+                window.open(url, '_blank');
             } else {
                 // Show coming soon alert for all other surveys
                 alert(translations[currentLang].comingSoon || translations['en'].comingSoon);
             }
+        }
+
+        function filterSurveys() {
+            const searchInput = document.getElementById('searchInput');
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const clearBtn = document.getElementById('clearSearch');
+            const cards = document.querySelectorAll('.survey-card');
+            const noResults = document.getElementById('noResults');
+            let visibleCount = 0;
+
+            // Toggle clear button
+            if (searchTerm) {
+                clearBtn.classList.add('active');
+            } else {
+                clearBtn.classList.remove('active');
+            }
+
+            // Filter cards
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title');
+                const description = card.getAttribute('data-description');
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            // Show/hide no results message
+            if (visibleCount === 0 && searchTerm) {
+                noResults.style.display = 'block';
+            } else {
+                noResults.style.display = 'none';
+            }
+        }
+
+        function clearSearch() {
+            const searchInput = document.getElementById('searchInput');
+            searchInput.value = '';
+            searchInput.focus();
+            filterSurveys();
         }
 
         renderSurveys();
